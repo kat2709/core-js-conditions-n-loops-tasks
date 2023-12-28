@@ -94,8 +94,15 @@ function canQueenCaptureKing(queen, king) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  if (
+    (a === b && a > 0 && c > 0 && c < a + b) ||
+    (a === c && a > 0 && b > 0 && b < a + b) ||
+    (b === c && a > 0 && b > 0 && a < c + b)
+  ) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -112,8 +119,25 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  const dictionary = {
+    1: 'I',
+    2: 'II',
+    3: 'III',
+    4: 'IV',
+    5: 'V',
+    6: 'VI',
+    7: 'VII',
+    8: 'VIII',
+    9: 'IX',
+    10: 'X',
+    20: 'XX',
+    30: 'XXX',
+  };
+  if (num <= 10 || num % 10 === 0) {
+    return dictionary[num];
+  }
+  return dictionary[num - (num % 10)] + dictionary[num % 10];
 }
 
 /**
@@ -131,8 +155,50 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+
+function convertNumberToString(numberStr) {
+  function getChar(ch) {
+    switch (ch) {
+      case '1':
+        return 'one';
+      case '2':
+        return 'two';
+      case '3':
+        return 'three';
+      case '4':
+        return 'four';
+      case '5':
+        return 'five';
+      case '6':
+        return 'six';
+      case '7':
+        return 'seven';
+      case '8':
+        return 'eight';
+      case '9':
+        return 'nine';
+      case '0':
+        return 'zero';
+      case '.':
+        return 'point';
+      case '-':
+        return 'minus';
+      case ',':
+        return 'point';
+      default:
+        return '';
+    }
+  }
+
+  let result = '';
+  for (let i = 0; i < numberStr.length; i += 1) {
+    if (i === numberStr.length - 1) {
+      result += getChar(numberStr[i]);
+    } else {
+      result += `${getChar(numberStr[i])} `;
+    }
+  }
+  return result;
 }
 
 /**
@@ -147,8 +213,12 @@ function convertNumberToString(/* numberStr */) {
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  let newStr = '';
+  for (let i = str.length - 1; i >= 0; i -= 1) {
+    newStr += str[i];
+  }
+  return str === newStr;
 }
 
 /**
