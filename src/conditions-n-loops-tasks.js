@@ -423,9 +423,35 @@ function rotateMatrix(matrix) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
-function sortByAsc(/* arr */) {
-  throw new Error('Not implemented');
-  // return arr.sort((a, b) => a - b);
+function swap(arr, i, j) {
+  const a = arr;
+  [a[i], a[j]] = [a[j], a[i]];
+}
+
+function partition(arr, l, r) {
+  const pivot = l + Math.floor(Math.random() * (r - l + 1));
+  swap(arr, pivot, r);
+  let j = l;
+  for (let i = l; i < r; i += 1) {
+    if (arr[i] < arr[r]) {
+      swap(arr, i, j);
+      j += 1;
+    }
+  }
+  swap(arr, j, r);
+  return j;
+}
+
+function quickSort(arr, l = 0, r = arr.length - 1) {
+  if (l >= r) {
+    return;
+  }
+  const pivot = partition(arr, l, r);
+  quickSort(arr, l, pivot - 1);
+  quickSort(arr, pivot + 1, r);
+}
+function sortByAsc(arr) {
+  quickSort(arr);
 }
 
 /**
@@ -487,6 +513,7 @@ function shuffleChar(str, iterations) {
  * @returns {number} The nearest larger number, or original number if none exists.
  */
 function getNearestBigger(/* number */) {
+  // todo
   throw new Error('Not implemented');
 }
 
